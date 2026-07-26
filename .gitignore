@@ -13,3 +13,4 @@ next-env.d.ts
 /mockups/screens.html
 /mockups/raw.png
 /.claude
+.env*
