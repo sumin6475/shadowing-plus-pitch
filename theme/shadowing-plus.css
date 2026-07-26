@@ -1,0 +1,43 @@
+/*
+  Theme: Shadowing Plus — "Cobalt Editorial".
+  Extracted from the project's own design system:
+  `Code HQ/Shadowing Plus/design-system/tokens.json` (v1.0.0, light mode).
+  Warm paper background, single cobalt accent, editorial serif display headlines (400),
+  pill buttons. OKLCH is canonical in that system, so values stay OKLCH here.
+
+  To activate: copy this :root block into app/theme.css, and in app/layout.tsx load
+  Instrument Serif (next/font/google, weight 400) as --font-instrument-serif.
+  Pretendard is not on Google Fonts; the stack below falls back to system Korean sans.
+*/
+:root {
+  /* Fonts. Body = Pretendard (sans), display headlines = Instrument Serif 400 ONLY. */
+  --brand-font: var(--font-pretendard, "Pretendard Variable"), Pretendard, ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --brand-font-heading: var(--font-instrument-serif, "Instrument Serif"), "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", serif;
+  --brand-heading-weight: 400; /* serif headlines are always 400 in this system */
+  --brand-heading-weight-sm: 400;
+  --brand-heading-tracking: -0.015em;
+
+  /* Color roles (OKLCH from tokens.json, light mode) */
+  --brand-page: oklch(0.985 0.004 70); /* bg — warm paper, never pure white */
+  --brand-surface: oklch(1 0 0); /* surface — cards on bg */
+  --brand-line: oklch(0.91 0.006 70); /* hairline */
+  --brand-heading: oklch(0.24 0.012 60); /* text */
+  --brand-body: oklch(0.42 0.011 60); /* text-2 */
+  --brand-muted: oklch(0.58 0.01 60); /* text-3 */
+  --brand-accent: oklch(0.48 0.165 258); /* accent-text — AA-safe cobalt text on light */
+  --brand-accent-solid: oklch(0.58 0.165 258); /* accent — cobalt #3b6ee1, buttons */
+  --brand-accent-hover: oklch(0.52 0.165 258); /* accent-hover */
+  --brand-accent-edge: oklch(0.58 0.165 258);
+  --brand-accent-deep: oklch(0.955 0.0264 258); /* accent-soft — tinted fill (hero shape) */
+  --brand-on-accent: #ffffff;
+  --brand-secondary: oklch(0.975 0.004 70); /* surface-2 */
+  --brand-secondary-edge: oklch(0.91 0.006 70); /* hairline */
+  --brand-frame: oklch(0.22 0.01 60); /* warm near-black device bezel */
+  --brand-frame-edge: oklch(0.38 0.01 60);
+
+  /* Shape + elevation (signature: pill buttons; layered warm shadows w/ inset highlight) */
+  --brand-radius-btn: 999px;
+  --brand-radius-card: 16px;
+  --brand-shadow-card: 0 1px 0 oklch(1 0 0 / 0.6) inset, 0 1px 1.5px oklch(0 0 0 / 0.04), 0 4px 14px -8px oklch(0 0 0 / 0.1);
+  --brand-shadow-elevated: 0 1px 0 oklch(1 0 0 / 0.6) inset, 0 2px 4px oklch(0 0 0 / 0.05), 0 12px 28px -14px oklch(0 0 0 / 0.18);
+}

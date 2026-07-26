@@ -1,0 +1,98 @@
+@import "tailwindcss";
+@import "./theme.css"; /* the ACTIVE brand — swap this file's values to swap the design system */
+
+/*
+  SEMANTIC design tokens. Components reference these by ROLE (bg-page, text-heading,
+  bg-accent-solid), never by a scale position or a raw hex. The literal values come from
+  the ACTIVE brand in app/theme.css. Swap that one file to swap the whole design system.
+  Default brand = the Figma "Sumin Kiim" indigo/dark template (theme/default.css).
+*/
+@theme {
+  --font-sans: var(--brand-font);
+  --font-heading: var(--brand-font-heading); /* headings may use a different face (e.g. an editorial serif) */
+
+  /* Color roles → filled by the active brand (app/theme.css → :root --brand-*) */
+  --color-page: var(--brand-page); /* page background */
+  --color-surface: var(--brand-surface); /* cards, panels */
+  --color-line: var(--brand-line); /* borders, dividers */
+  --color-heading: var(--brand-heading); /* headings, primary text */
+  --color-body: var(--brand-body); /* body copy */
+  --color-muted: var(--brand-muted); /* captions */
+  --color-accent: var(--brand-accent); /* accent line, eyebrow, checks, metric numbers */
+  --color-accent-solid: var(--brand-accent-solid); /* button fill, shape outlines */
+  --color-accent-hover: var(--brand-accent-hover); /* button hover */
+  --color-accent-edge: var(--brand-accent-edge); /* accent border */
+  --color-accent-deep: var(--brand-accent-deep); /* filled hero shape */
+  --color-on-accent: var(--brand-on-accent); /* text on an accent-solid surface */
+  --color-secondary: var(--brand-secondary); /* secondary button fill */
+  --color-secondary-edge: var(--brand-secondary-edge); /* secondary button border */
+  --color-frame: var(--brand-frame); /* device bezel for the scroll-tilt hero screenshot */
+  --color-frame-edge: var(--brand-frame-edge); /* device bezel border */
+
+  /* Type scale. Sizes are the template's rhythm; heading WEIGHT and TRACKING are brand
+     tokens because they carry the brand voice (e.g. ExtraBold sans vs. a 400 serif). */
+  --text-display: 4.5rem;
+  --text-display--line-height: 1.1;
+  --text-display--font-weight: var(--brand-heading-weight);
+  --text-display--letter-spacing: var(--brand-heading-tracking);
+  --text-h2: 3.5rem;
+  --text-h2--line-height: 1.1;
+  --text-h2--font-weight: var(--brand-heading-weight);
+  --text-h2--letter-spacing: var(--brand-heading-tracking);
+  --text-h3: 3rem;
+  --text-h3--line-height: 1.1;
+  --text-h3--font-weight: var(--brand-heading-weight);
+  --text-h3--letter-spacing: var(--brand-heading-tracking);
+  --text-h5: 2rem;
+  --text-h5--line-height: 1.1;
+  --text-h5--font-weight: var(--brand-heading-weight-sm);
+  --text-h5--letter-spacing: var(--brand-heading-tracking);
+  --text-h6: 1.5rem;
+  --text-h6--line-height: 1.1;
+  --text-h6--font-weight: var(--brand-heading-weight-sm);
+  --text-h6--letter-spacing: var(--brand-heading-tracking);
+  --text-subtitle: 1.25rem;
+  --text-subtitle--line-height: 1.1;
+  --text-subtitle--font-weight: 500;
+  --text-body-xl: 1.5rem;
+  --text-body-xl--line-height: 1.6;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.6;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5;
+  --text-btn: 1.25rem;
+  --text-btn--line-height: 1.5rem;
+  --text-btn--font-weight: 500;
+
+  /* Radius roles — brands differ (sharp squares vs pills) */
+  --radius-btn: var(--brand-radius-btn);
+  --radius-card: var(--brand-radius-card);
+
+  /* Elevation */
+  --shadow-card: var(--brand-shadow-card);
+  --shadow-elevated: var(--brand-shadow-elevated);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-page);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

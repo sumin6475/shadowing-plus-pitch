@@ -1,0 +1,35 @@
+/*
+  Theme: HAIT — extracted from that project's own design system
+  (Code HQ/HAIT/client/src/index.css, shadcn HSL tokens). Library copy.
+  Light theme, cool lavender-grey page + white cards, indigo/purple accent, DM Sans, 12px.
+  To activate: copy this :root into app/theme.css AND load DM Sans (--font-dm-sans) in layout.tsx.
+*/
+:root {
+  --brand-font: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --brand-font-heading: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --brand-heading-weight: 700;
+  --brand-heading-weight-sm: 700;
+  --brand-heading-tracking: -0.015em;
+
+  --brand-page: hsl(228 25% 93%);
+  --brand-surface: hsl(0 0% 100%);
+  --brand-line: hsl(228 20% 86%);
+  --brand-heading: hsl(240 24% 16%);
+  --brand-body: hsl(228 16% 34%);
+  --brand-muted: hsl(228 10% 50%);
+  --brand-accent: hsl(245 55% 55%);
+  --brand-accent-solid: hsl(245 55% 55%);
+  --brand-accent-hover: hsl(245 55% 48%);
+  --brand-accent-edge: hsl(245 55% 55%);
+  --brand-accent-deep: hsl(262 96% 74%);
+  --brand-on-accent: hsl(0 0% 100%);
+  --brand-secondary: hsl(228 25% 96%);
+  --brand-secondary-edge: hsl(228 20% 88%);
+  --brand-frame: hsl(245 30% 16%); /* dark indigo-charcoal device bezel */
+  --brand-frame-edge: hsl(245 22% 30%);
+
+  --brand-radius-btn: 8px;
+  --brand-radius-card: 12px;
+  --brand-shadow-card: 0 1px 2px hsl(240 24% 16% / 0.05), 0 4px 14px -6px hsl(240 24% 16% / 0.1);
+  --brand-shadow-elevated: 0 2px 6px hsl(240 24% 16% / 0.06), 0 24px 48px -16px hsl(240 24% 16% / 0.22);
+}
