@@ -97,7 +97,7 @@ export const content: PitchContent = {
       },
       {
         title: "A phrase bank that tracks what you can actually use",
-        body: "Select a line inside your own uploaded media, get a context-aware Korean explanation, and save it with its video, subtitle, and timestamp intact. Each phrase carries an honest evidence level: New, Recognizing, Practicing, Ready to use, or Needs refresh.",
+        body: "Select a line inside your own uploaded media, get a context-aware Korean explanation, and save it with its video, subtitle, and timestamp intact. Each phrase then carries an evidence level you have to earn.",
         points: [
           "Status only moves on a learner quick-check. A view, a replay, or an AI suggestion never promotes a phrase on its own.",
           "Search asks what you are trying to say, and answers only from your own saved material.",
@@ -107,17 +107,13 @@ export const content: PitchContent = {
       },
       {
         title: "Spaced repetition over the lines you got wrong",
-        body: "Bookmarked sentences become an SM-2-lite drill. Again, Good, and Easy schedule the next review, with an undo that rolls the verdict back on both the client and the server. The scheduler is a pure function under table-driven tests.",
+        body: "Bookmarked sentences become an SM-2-lite drill. Again, Good, and Easy schedule the next review, and an undo rolls the verdict back on both the client and the server.",
         image: "/shots/practice.png",
         visualLabel: "Practice mode",
       },
       {
         title: "A five-stage media pipeline that survives its own failures",
-        body: "Extract, transcribe, postprocess, translate, persist. Every stage writes a JSON checkpoint to R2 and can be re-run on its own from a job card, so a timeout during translation never costs the transcription already paid for.",
-        points: [
-          "ElevenLabs Scribe v2 for speech recognition, GPT-4o-mini for translation, ffmpeg for audio extraction.",
-          "Postprocess is a pure Segment[] to Segment[] transform: merge duplicates, drop empties, fix timing, regroup sentences, remove hallucinations.",
-        ],
+        body: "Five stages, because a timeout in translation should not cost the transcription already paid for. Each one checkpoints to R2 and re-runs on its own.",
         image: "/shots/pipeline.png",
         visualLabel: "extract · transcribe · postprocess · translate · persist",
       },
@@ -144,34 +140,34 @@ export const content: PitchContent = {
     decisions: [
       {
         title: "Rebuilt single-user shortcuts into per-user row-level security",
-        body: "The first version ran with RLS off and a shared anon key. That is fine for one user and a privacy hole for two. Migration 008 turned RLS on with per-user policies: client queries scope by auth.uid(), and service-key routes filter by user_id themselves, because the service key bypasses RLS. No external user gets invited until a two-account isolation test passes.",
+        body: "RLS off with a shared anon key is fine for one user and a privacy hole for two. Migration 008 moved every table to per-user policies, and nobody outside the build gets invited until a two-account isolation test passes.",
       },
       {
         title: "Made private media private by signed URL, not by obscurity",
-        body: "Media rows used to hold public R2 URLs. They now hold bare object keys, and playback resolves through an authenticated route that mints a short-lived signed URL. A guessable public URL is not access control.",
+        body: "Media rows hold bare object keys now, and playback resolves through an authenticated route that mints a short-lived signed URL. A guessable public URL is not access control.",
       },
       {
         title: "Matched translations by batch position, not by the index the model returned",
-        body: "GPT-4o-mini occasionally drops or reorders items inside a batch, which silently pairs a Korean line with the wrong English sentence. Matching on the position sent rather than the index returned makes that drift impossible, and the fixed instruction sits in a system message so it caches.",
+        body: "GPT-4o-mini sometimes drops or reorders items inside a batch, which silently pairs a Korean line with the wrong English sentence. Matching on the position sent makes that drift impossible.",
       },
       {
         title: "Cut public YouTube caption import from the launch",
-        body: "The official IFrame API authorizes embedded playback, not bulk caption collection, and hosting a scraper elsewhere does not change the terms. Private uploads are the public ingestion path. The owner-only experiment stays gated and the Chrome extension stays a personal tool rather than a launch dependency.",
+        body: "The official IFrame API authorizes embedded playback, not bulk caption collection. Private uploads became the only ingestion path.",
       },
       {
-        title: "Kept the pure logic pure so it could be tested at all",
-        body: "Transcript postprocess, the SRS scheduler, phrase retrieval, and due-selection are I/O-free functions, and that is where all 78 tests live. Routes and adapters are deliberately left out, because mocking them would only test the mocks.",
+        title: "Kept the pure logic pure",
+        body: "Postprocess, SRS, and retrieval are I/O-free. That is where all 78 tests live.",
       },
     ],
     skills: [
-      "Shipping an LLM product end to end: two AI providers wired into one production pipeline, deployed and running",
-      "Defensive handling of model output: batched calls, positional mapping instead of returned indices, a cached system prompt",
-      "Usage and cost observability: every billable call writes tokens, audio seconds, and computed spend to its own table",
-      "Retrieval with judgment: transparent scoped matching over the learner's own material, with vector search deliberately deferred until the simple version fails",
-      "Auth and data isolation: Supabase Auth, per-user RLS, signed private object storage",
-      "Async pipeline design: idempotent stages, checkpointing, retry from the failed stage",
-      "Human-centered measurement: evidence levels a learner earns, never inferred from a view or an AI suggestion",
-      "Full-stack TypeScript: schema, API routes, and UI shipped by one person",
+      "Shipped an LLM product end to end: two AI providers, one production pipeline",
+      "Defended against model drift: batched calls mapped by position, not by returned index",
+      "Metered spend. Every billable call logs tokens, audio seconds, and cost",
+      "Chose inspectable retrieval over vector search until the simple version fails",
+      "Per-user RLS and signed private object storage",
+      "Idempotent pipeline stages with checkpointed retry",
+      "Evidence levels a learner earns, never inferred from a view",
+      "Full-stack TypeScript, solo: schema to UI",
     ],
     learnings: [
       "A bug that hits desktop, mobile, and the installed PWA at once is a server or deploy cause, not three client bugs.",
@@ -191,9 +187,10 @@ export const content: PitchContent = {
       { label: "lines of TypeScript across 150 files, solo since April 2026", value: "21k" },
     ],
     notes: [
-      "The public MVP is one Language Island, Explain what I do, going out as a free invite-only web beta. The bar is deliberately small and falsifiable: of the first ten recruited users, five complete two attempts and report retrieving a phrase they had saved earlier, without being shown a script.",
-      "What is not proven: nobody outside the build has used it yet, and the production auth and RLS state is still gated behind a two-account isolation test. That gate is exactly why the beta is invite-only rather than open.",
-      "Next is the speak loop the island was built for: one attempt, one diagnosed gap, one short repair, then a second attempt with honest evidence recorded. A native client on Expo is scaffolded and already authenticates against the same API.",
+      "The public MVP is one Language Island, Explain what I do, going out as a free invite-only web beta.",
+      "The bar is small and falsifiable: of the first ten users, five complete two attempts and report retrieving a phrase they had saved earlier, without being shown a script.",
+      "What is not proven: nobody outside the build has used it. Production auth and RLS still sit behind a two-account isolation test, which is why the beta is invite-only rather than open.",
+      "Next is the speak loop the island was built for: one attempt, one diagnosed gap, one repair, then a second attempt. An Expo client is scaffolded against the same API.",
     ],
   },
   cta: {
