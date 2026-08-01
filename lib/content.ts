@@ -199,10 +199,12 @@ export const content: PitchContent = {
   cta: {
     top: "Want the full story?",
     accent: "Read the code.",
-    body: "The repo, the live app, and the résumé are one click away.",
+    body: "The repo and the résumé are one click away.",
   },
   links: {
-    demo: "https://shadowing-plus.vercel.app",
+    // demo intentionally unset. Every surface (header, hero, CTA, footer) guards
+    // on links.demo, so leaving it out removes the "Live demo" button from all
+    // four at once. Restore by setting it back to https://shadowing-plus.vercel.app.
     repo: "https://github.com/sumin6475/shadowing-plus",
     resume:
       "https://drive.google.com/file/d/1l_2-hgLLXuP7KYbc_mRQ9TbwnBCi0rOA/view?usp=sharing",
