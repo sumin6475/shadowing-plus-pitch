@@ -204,6 +204,6 @@ export const content: PitchContent = {
     demo: "https://shadowing-plus.vercel.app",
     repo: "https://github.com/sumin6475/shadowing-plus",
     resume:
-      "https://drive.google.com/file/d/1l_2-hgLLXuP7KYbc_mRQ9TbwnBCi0rOA/view?usp=sharing",
+      "https://drive.google.com/file/d/1DBdEhjKGV2s1IsiJAYx0cqo1pvPDJLmZ/view?usp=sharing",
   },
 };
